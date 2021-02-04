@@ -137,7 +137,7 @@
                 android:id="@+id/player_control"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp">
+                android:layout_marginBottom="34dp">
 
             <ImageButton
                     android:id="@+id/butPlay"
@@ -207,6 +207,7 @@
 
             <de.danoeh.antennapod.view.PlaybackSpeedIndicatorView
                     android:id="@+id/butPlaybackSpeed"
+                    android:visibility="gone"
                     android:layout_width="@dimen/audioplayer_playercontrols_length"
                     android:layout_height="@dimen/audioplayer_playercontrols_length"
                     android:layout_toLeftOf="@id/butRev"
@@ -262,7 +263,7 @@
                     android:clickable="false"/>
 
             <ImageButton
-                    android:id="@+id/butSkip"
+                    android:id="@+id/butPlayList"
                     android:layout_width="@dimen/audioplayer_playercontrols_length"
                     android:layout_height="@dimen/audioplayer_playercontrols_length"
                     android:layout_toRightOf="@id/butFF"
@@ -270,9 +271,13 @@
                     android:layout_centerVertical="true"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:scaleType="fitCenter"
-                    app:srcCompat="?attr/av_skip"
-                    android:contentDescription="@string/skip_episode_label"
-                    tools:srcCompat="@drawable/ic_av_skip_white_48dp"/>
+                    android:scaleX=".7"
+                    android:scaleY=".7"
+                    android:alpha=".7"
+                    android:layout_marginLeft="7dp"
+                    app:srcCompat="?attr/av_playlist"
+                    android:contentDescription="@string/queue_label"
+                    tools:srcCompat="@drawable/ic_av_playlist_white_48dp"/>
         </RelativeLayout>
 
     </LinearLayout>

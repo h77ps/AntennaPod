@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -87,7 +88,7 @@ public class AudioPlayerFragment extends Fragment implements
     private ImageButton butPlay;
     private ImageButton butFF;
     private TextView txtvFF;
-    private ImageButton butSkip;
+    private ImageButton butPlaylist;
     private Toolbar toolbar;
     private ProgressBar progressIndicator;
     private CardView cardViewSeek;
@@ -126,7 +127,7 @@ public class AudioPlayerFragment extends Fragment implements
         butPlay = root.findViewById(R.id.butPlay);
         butFF = root.findViewById(R.id.butFF);
         txtvFF = root.findViewById(R.id.txtvFF);
-        butSkip = root.findViewById(R.id.butSkip);
+        butPlaylist = root.findViewById(R.id.butPlayList);
         progressIndicator = root.findViewById(R.id.progLoading);
         cardViewSeek = root.findViewById(R.id.cardViewSeek);
         txtvSeek = root.findViewById(R.id.txtvSeek);
@@ -215,8 +216,12 @@ public class AudioPlayerFragment extends Fragment implements
                     SkipPreferenceDialog.SkipDirection.SKIP_FORWARD, txtvFF);
             return false;
         });
-        butSkip.setOnClickListener(v ->
-                IntentUtils.sendLocalBroadcast(getActivity(), PlaybackService.ACTION_SKIP_CURRENT_EPISODE));
+        butPlaylist.setOnClickListener(v ->{
+                    FragmentActivity activity =  AudioPlayerFragment.this.getActivity();
+                    Log.d(TAG,"YAY ACTIVITY "+ activity.getClass());
+                    ((MainActivity) getActivity()).loadFragment(QueueFragment.TAG,null);
+                    ((MainActivity) getActivity()).getBottomSheet().setState(BottomSheetBehavior.STATE_COLLAPSED);
+        });
     }
 
     private void setupLengthTextView() {
@@ -266,8 +271,8 @@ public class AudioPlayerFragment extends Fragment implements
             new VariableSpeedDialog().show(getChildFragmentManager(), null);
             return true;
         });
-        butPlaybackSpeed.setVisibility(View.VISIBLE);
-        txtvPlaybackSpeed.setVisibility(View.VISIBLE);
+        butPlaybackSpeed.setVisibility(View.GONE);
+        txtvPlaybackSpeed.setVisibility(View.GONE);
     }
 
     protected void updatePlaybackSpeedButton(Playable media) {
@@ -282,8 +287,8 @@ public class AudioPlayerFragment extends Fragment implements
         txtvPlaybackSpeed.setText(speedStr);
         butPlaybackSpeed.setSpeed(speed);
         butPlaybackSpeed.setAlpha(controller.canSetPlaybackSpeed() ? 1.0f : 0.5f);
-        butPlaybackSpeed.setVisibility(View.VISIBLE);
-        txtvPlaybackSpeed.setVisibility(View.VISIBLE);
+        butPlaybackSpeed.setVisibility(View.GONE);
+        txtvPlaybackSpeed.setVisibility(View.GONE);
     }
 
     protected void updateWakeLock() {

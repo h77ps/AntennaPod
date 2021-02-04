@@ -85,6 +85,8 @@ public class PlaybackControlsDialog extends DialogFragment {
         barRightVolume.setProgress(UserPreferences.getRightVolumePercentage());
         final CheckBox stereoToMono = dialog.findViewById(R.id.stereo_to_mono);
         stereoToMono.setChecked(UserPreferences.stereoToMono());
+        final CheckBox keepAwake = dialog.findViewById(R.id.keep_awake);
+        keepAwake.setChecked(UserPreferences.isWakeLockEnabled());
         if (controller != null && !controller.canDownmix()) {
             stereoToMono.setEnabled(false);
             String sonicOnly = getString(R.string.sonic_only);

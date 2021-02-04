@@ -36,6 +36,7 @@
         <item name="av_replay">@drawable/ic_av_replay_black_48dp</item>
         <item name="av_rewind">@drawable/ic_av_fast_rewind_black_48dp</item>
         <item name="av_fast_forward">@drawable/ic_av_fast_forward_black_48dp</item>
+        <item name="av_playlist">@drawable/ic_av_playlist_black_48dp</item>
         <item name="av_skip">@drawable/ic_av_skip_black_48dp</item>
         <item name="ic_settings_speed">@drawable/ic_playback_speed_black</item>
         <item name="ic_settings_skip">@drawable/ic_av_skip_black_24dp</item>
@@ -115,6 +116,7 @@
         <item name="av_download">@drawable/ic_download_white</item>
         <item name="av_rewind">@drawable/ic_av_fast_rewind_white_48dp</item>
         <item name="av_fast_forward">@drawable/ic_av_fast_forward_white_48dp</item>
+        <item name="av_playlist">@drawable/ic_av_playlist_white_48dp</item>
         <item name="av_pause">@drawable/ic_av_pause_white_48dp</item>
         <item name="av_play">@drawable/ic_av_play_white_48dp</item>
         <item name="av_replay">@drawable/ic_av_replay_white_48dp</item>

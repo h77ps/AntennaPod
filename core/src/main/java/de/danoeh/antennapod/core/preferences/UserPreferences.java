@@ -1001,6 +1001,12 @@ public class UserPreferences {
         return prefs.getBoolean(PREF_WAKELOCK_PLAYER, false);
     }
 
+    public static void setWakeLockEnabled(boolean wakeLockEnabled){
+        prefs.edit()
+                .putBoolean(PREF_WAKELOCK_PLAYER, wakeLockEnabled)
+                .apply();
+    }
+
     public enum VideoBackgroundBehavior {
         STOP, PICTURE_IN_PICTURE, CONTINUE_PLAYING
     }
