@@ -59,13 +59,15 @@
 
         <ImageButton
                 android:id="@+id/butPlay"
-                android:layout_width="52dp"
+                android:layout_width="72dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
                 android:contentDescription="@string/pause_label"
                 android:background="?attr/selectableItemBackground"
                 app:srcCompat="?attr/av_play"
                 android:scaleType="fitCenter"
                 android:padding="8dp"
+                android:layout_gravity="center"
                 tools:src="@drawable/ic_av_play_white_48dp"/>
 
     </LinearLayout>

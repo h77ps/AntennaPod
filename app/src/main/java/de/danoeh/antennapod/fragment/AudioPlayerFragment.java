@@ -1,6 +1,7 @@
 package de.danoeh.antennapod.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -291,18 +292,20 @@ public class AudioPlayerFragment extends Fragment implements
         txtvPlaybackSpeed.setVisibility(View.GONE);
     }
 
-    protected void updateWakeLock() {
+    protected void updateWakeLock(PlayerStatus status) {
         boolean isWakeLockEnabled = UserPreferences.isWakeLockEnabled();
-        boolean isPlayerPlaying = controller.getStatus() == PlayerStatus.PLAYING;
+        boolean isPlayerPlaying = status == PlayerStatus.PLAYING;
 
-        if (isWakeLockEnabled && isPlayerPlaying) {
-            AudioPlayerFragment.this.getActivity()
-                    .getWindow()
-                    .addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        } else {
+        if (!isPlayerPlaying){
+            // Log.d(TAG, "YAY REMOVING LOCK " + controller.getStatus());
             AudioPlayerFragment.this.getActivity()
                     .getWindow()
                     .clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        } else if (isWakeLockEnabled) {
+            // Log.d(TAG, "YAY Setting LOCK " + controller.getStatus());
+            AudioPlayerFragment.this.getActivity()
+                    .getWindow()
+                    .addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 
@@ -404,6 +407,11 @@ public class AudioPlayerFragment extends Fragment implements
             public void onSetSpeedAbilityChanged() {
                 updatePlaybackSpeedButton(getMedia());
             }
+
+            @Override
+            public void onPlayerStatusChanged(PlayerStatus status) {
+                updateWakeLock(status);
+            }
         };
     }
 
@@ -413,8 +421,8 @@ public class AudioPlayerFragment extends Fragment implements
         }
         updatePosition(new PlaybackPositionEvent(controller.getPosition(), controller.getDuration()));
         updatePlaybackSpeedButton(media);
-        updateWakeLock();
         setupOptionsMenu(media);
+        updateWakeLock(controller.getStatus());
     }
 
     @Override

@@ -359,6 +359,8 @@ public class PlaybackController {
 
     public void onPlaybackEnd() {}
 
+    public void onPlayerStatusChanged(PlayerStatus status){}
+
     /**
      * Is called whenever the PlaybackService changes its status. This method
      * should be used to update the GUI or start/cancel background threads.
@@ -380,6 +382,7 @@ public class PlaybackController {
         }
 
         Log.d(TAG, "status: " + status.toString());
+        onPlayerStatusChanged(status);
         switch (status) {
             case ERROR:
                 EventBus.getDefault().post(new MessageEvent(activity.getString(R.string.player_error_msg)));

@@ -147,6 +147,10 @@ public class PlaybackControlsDialog extends DialogFragment {
                 controller.setDownmix(isChecked);
             }
         });
+
+        keepAwake.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            UserPreferences.setWakeLockEnabled(isChecked);
+        });
     }
 
     private void setupAudioTracks() {
